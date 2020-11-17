@@ -1,4 +1,4 @@
-# SKILL codes:
+# SKILL Codes:
 1. `CahngeParam.il` : This code will find an instance CDF parameter for a given instance cellName and change to a new value.
 2. `Pin2Label.il`   : This code will generate labels from pins.
 3. `GenLayout.il`   : This code will generate layout of schematic views present inside the Library given by user.
