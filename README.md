@@ -108,5 +108,52 @@ numbers = '(1 2 3)
 length(numbers)      => 3      ; it gives the length of the list.
 ```
 
+## File Input/Output
+This section introduces how to
+- Display values using default formats and application-specific formats
+- Write UNIX text files
+- Read UNIX text files
+
+### Displaying Data
+- Using `print` function
+```
+for(i 1 3 print("hello"))
+
+=> "hello" "hello" "hello"
+```
+- Using `println` function
+```
+for(i 1 3 println("hello"))
+
+=> "hello"
+   "hello"
+   "hello"
+```
+- Using `printf` function
+```
+aList = '(1 2 3)
+printf("\n This is a list: %L" aList)
+
+=> This is a list: (1 2 3) 
+```
+### Writing data to a file
+
+To write text data to a file  
+1. Use the outfile function to obtain an output port on a file.  
+2. Use an optional output port parameter to the print and println functions and/or use a required port parameter to the fprintf function.  
+3. Close the output port with the close function.  
+
+```
+myPort = outfile("/home/vsao/myfile")
+for(i 1 3
+    println(list("Number:" i) myport)
+    )
+close(myport)
+
+=> ("Number:" 1)
+   ("Number:" 2)
+   ("Number:" 3)
+
+```
 
 
