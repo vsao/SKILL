@@ -44,17 +44,15 @@ Example: `strname("My" "name" "is" "akhil")`
 
 ### SKILL Operators
 
-| Operators in Descending Precedence | Underlying Function        | Operation            |
-|------------------------------------|----------------------------|----------------------|
-|               **                   |  expt                      |   arithmetic         |
-|                *                   |  times                     |   arithmetic         |
-                /                       quotient 
-|               +                    |  plus                      |   arithmetic         |
-                –                       difference 
-|               ++s, s++             |  preincrement,postincrement|  arithmetic          |
-|               ==                   |  equal                     |  tests for equality  |
-|               !=                   |  nequal                    |  tests for inequality|
-|               =                    |  setq                      |  assignment          | 
+| Operators in Descending Precedence |     Underlying Function    |      Operation         |
+|------------------------------------|----------------------------|------------------------|
+|               **                   |  expt                      |   arithmetic           |
+|               *, /                 |  times, quotient           |   arithmetic           |                                      
+|               +, –                 |  plus,  difference         |   arithmetic           |                                     
+|               ++s, s++             |  preincrement,postincrement|   arithmetic           |
+|               ==                   |  equal                     |   tests for equality   |
+|               !=                   |  nequal                    |   tests for inequality |
+|               =                    |  setq                      |   assignment           | 
 
 
 
