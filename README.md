@@ -48,9 +48,9 @@ Example: `strname("My" "name" "is" "akhil")`
 |------------------------------------|----------------------------|----------------------|
 |               **                   |  expt                      |   arithmetic         |
 |                *                   |  times                     |   arithmetic         |
-|               /                    |  quotient 
+                /                       quotient 
 |               +                    |  plus                      |   arithmetic         |
-|               –                    |  difference 
+                –                       difference 
 |               ++s, s++             |  preincrement,postincrement|  arithmetic          |
 |               ==                   |  equal                     |  tests for equality  |
 |               !=                   |  nequal                    |  tests for inequality|
