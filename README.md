@@ -54,6 +54,8 @@ Example: `strname("My" "name" "is" "akhil")`
 |               !=                   |  nequal                    |   tests for inequality |
 |               =                    |  setq                      |   assignment           | 
 
+## SKILL List
+
 
 
 
