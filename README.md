@@ -155,5 +155,21 @@ close(myport)
    ("Number:" 3)
 
 ```
+### Reading Data from a file
 
+To read a text file
+1. Use the infile function to obtain an input port.
+2. Use the gets function to read the file a line at a time and/or
+use the fscanf function to convert text fields upon input.
+3. Close the input port with the close function.
+
+```
+inPort = infile( "~/.cshrc" )
+when( inPort
+while( gets( nextLine inPort )
+println( nextLine )
+)
+close( inPort )
+)
+```
 
