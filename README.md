@@ -19,11 +19,14 @@ Figure1: SKILL Invocation
 
 ### Terms and Definitions
 
-|         Term             |          Definition                                               |
-|--------------------------|-------------------------------------------------------------------|
-| Bindkeys                 |   A bindkey associates a SKILL function with a keyboard event.    |
-| CIW                      |   Command Interpreter Window                                      |
-| SKILL function           |   A named, parameterizable body of one or more SKILL expressions. |
-| SKILL procedure          |   This term is used interchangeably with the term SKILL function. |
+|         Term             |          Definition                                                                         |
+|--------------------------|---------------------------------------------------------------------------------------------|
+| Bindkeys                 |   A bindkey associates a SKILL function with a keyboard event.                              |
+| CIW                      |   Command Interpreter Window                                                                |
+| SKILL function           |   A named, parameterizable body of one or more SKILL expressions.                           |
+| SKILL procedure          |   This term is used interchangeably with the term SKILL function.                           |
+| SKILL interpreter        |   The SKILL interpreter executes SKILL programs within the Cadence environment.             |
+| SKILL Process            |   A separate UNIX process that can submit SKILL functions directly to the SKILL interpreter.|
+
 
 
