@@ -173,3 +173,14 @@ when( inPort
 )
 ```
 **Note:** We can use fprintf() for printing insted of println() and fscanf() in place of gets() for reading the data.
+
+## Flow of Control
+
+This section introduces you to
+- Relational Operators: <, <=, >, >=, ==, !=
+- Logical Operators: !, &&, ||
+- Branching: if, when, unless
+- Multi-way Branching: case
+- Iteration: for, foreach
+ 
+
