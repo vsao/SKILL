@@ -39,7 +39,7 @@ Sample SKILL Data items:
 | text string    | "Mary had a little lamb"|
 
 ### Calling a Function
-Function names are case sensitive. Function name with its arguments inside parentheses is stated to call a function.
+Function names are case sensitive. Function name with its arguments inside parentheses is stated to call a function.  
 Example:  
 strname("My" "name" "is" "akhil")
 
