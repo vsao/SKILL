@@ -55,6 +55,14 @@ Example: `strname("My" "name" "is" "akhil")`
 |               =                    |  setq                      |   assignment           | 
 
 ## SKILL List
+SKILL List is the ordered collection of the SKILL data objects.
+Sample general lists:
+|    List         |             Explanation                             |
+|-----------------|-----------------------------------------------------|
+| (1 2 3)         | A list containing the integer constants 1, 2, and 3 |
+| (1)             | A list containing the single element 1              |
+| ()              | An empty list (same as the special atom nil)        |
+| (1 (2 3) 4)     | A list containing another list as its second element|
 
 
 
