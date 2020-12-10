@@ -172,4 +172,4 @@ when( inPort
   close( inPort )
 )
 ```
-*Note* We can use fprintf() for printing insted of println() and fscanf() in place of gets() for reading the data.
+**Note:** We can use fprintf() for printing insted of println() and fscanf() in place of gets() for reading the data.
