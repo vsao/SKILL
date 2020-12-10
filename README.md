@@ -28,5 +28,15 @@ Figure1: SKILL Invocation
 | SKILL interpreter        |   The SKILL interpreter executes SKILL programs within the Cadence environment.             |
 | SKILL Process            |   A separate UNIX process that can submit SKILL functions directly to the SKILL interpreter.|
 
+### SKILL Data
+The simplest SKILL expression is a data item. SKILL data is case sensitive.  
+Sample SKILL Data items:
+
+|   Data Type    | Syntax Example
+|----------------|-------------------------|
+| integer        | 5                       |   
+| floating point | 5.3                     |
+| text string    | "Mary had a little lamb"|
+
 
 
