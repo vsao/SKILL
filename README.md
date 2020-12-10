@@ -40,8 +40,7 @@ Sample SKILL Data items:
 
 ### Calling a Function
 Function names are case sensitive. Function name with its arguments inside parentheses is stated to call a function.  
-Example:  
-strname("My" "name" "is" "akhil")
+Example: `strname("My" "name" "is" "akhil")`
 
 
 
