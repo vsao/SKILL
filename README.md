@@ -80,8 +80,33 @@ result = cons( 1 result)    => (1 2 3)
 list1 = '(1 2 3)                    => (1 2 3)
 list2 = '(4 5 6)                    => (4 5 6)
 list_final = append(list1 list2)    => (1 2 3 4 5 6)
-'''
-
+```
+- Retrieving 1st element of a list using `car` function
+```
+numbers = '(1 2 3)
+car(numbers)         => 1
+```
+- Retrieving tail of the list using `cdr` function
+```
+numbers = '(1 2 3)
+cdr(numbers)        => (2 3)
+```
+- Retriving an element given an index using `nth` function
+```
+numbers = '(1 2 3)
+nth(1 numbers)       => 2
+```
+- Member function
+```
+numbers = '(1 2 3)
+member(4 numbers)    => nil
+member(2 numbers)    => (2 3)   ; it finds where 2 is present in the list and prints all the elements from 2 till last element.
+```
+- length function
+```
+numbers = '(1 2 3)
+length(numbers)      => 3      ; it gives the length of the list.
+```
 
 
 
