@@ -17,6 +17,8 @@ SKILL is command language of cadence environment. Whenever we use menus, bindkye
 ![SKILL_Invocation](https://github.com/vsao/SKILL/blob/main/SKILL_Invocation.png)
 Figure1: SKILL Invocation
 
+### Terms and Definitions
+
 |         Term             |          Definition                                               |
 |--------------------------|-------------------------------------------------------------------|
 | Bindkeys                 |   A bindkey associates a SKILL function with a keyboard event.    |
