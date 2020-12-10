@@ -15,5 +15,5 @@ SKILL is command language of cadence environment. Whenever we use menus, bindkye
 ### Invoking a SKILL Function
 
 ![SKILL_Invocation](https://github.com/vsao/SKILL/blob/main/SKILL_Invocation.png)
-Figure1: SKILL Invocation
+              Figure1: SKILL Invocation
 
