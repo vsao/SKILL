@@ -168,8 +168,8 @@ inPort = infile( "~/.cshrc" )
 when( inPort
   while( gets( nextLine inPort )
     println( nextLine )
-      )
+       )
   close( inPort )
 )
 ```
-
+*Note* We can use fprintf() for printing insted of println() and fscanf() in place of gets() for reading the data.
