@@ -65,11 +65,22 @@ Sample general lists:
 | (1 (2 3) 4)     | A list containing another list as its second element|
 
 ### Buliding SKILL List
-List can be created either using single qoute operator(') or list function.  
+- List can be created either using single qoute operator(') or list function.  
 ```
 '(1 2 3)        => (1 2 3)  
-list(1 2 3)     => (1 2 3)  
+list(1 2 3)     => (1 2 3) 
 ```
+- Adding an element to the front of a list using `cons` function
+```
+result = '(2 3)             => (2 3)
+result = cons( 1 result)    => (1 2 3)
+```
+- Merging two lists using `append` function
+```
+list1 = '(1 2 3)                    => (1 2 3)
+list2 = '(4 5 6)                    => (4 5 6)
+list_final = append(list1 list2)    => (1 2 3 4 5 6)
+'''
 
 
 
