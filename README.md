@@ -166,10 +166,10 @@ use the fscanf function to convert text fields upon input.
 ```
 inPort = infile( "~/.cshrc" )
 when( inPort
-while( gets( nextLine inPort )
-println( nextLine )
-)
-close( inPort )
+  while( gets( nextLine inPort )
+    println( nextLine )
+      )
+  close( inPort )
 )
 ```
 
