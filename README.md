@@ -32,7 +32,7 @@ Figure1: SKILL Invocation
 The simplest SKILL expression is a data item. SKILL data is case sensitive.  
 Sample SKILL Data items:
 
-|   Data Type    | Syntax Example
+|   Data Type    | Syntax Example          |
 |----------------|-------------------------|
 | integer        | 5                       |   
 | floating point | 5.3                     |
@@ -41,6 +41,21 @@ Sample SKILL Data items:
 ### Calling a Function
 Function names are case sensitive. Function name with its arguments inside parentheses is stated to call a function.  
 Example: `strname("My" "name" "is" "akhil")`
+
+### SKILL Operators
+
+| Operators in Descending Precedence | Underlying Function        | Operation            |
+|------------------------------------|----------------------------|----------------------|
+|               **                   |  expt                      |   arithmetic         |
+|                *                   |  times                     |   arithmetic         |
+|               /                    |  quotient 
+|               +                    |  plus                      |   arithmetic         |
+|               –                    |  difference 
+|               ++s, s++             |  preincrement,postincrement|  arithmetic          |
+|               ==                   |  equal                     |  tests for equality  |
+|               !=                   |  nequal                    |  tests for inequality|
+|               =                    |  setq                      |  assignment          | 
+
 
 
 
