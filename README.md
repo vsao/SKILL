@@ -189,3 +189,17 @@ Examples:
 1. 3 < 5           => t
 2. 10 > 2          => nil
 3. "abc" != "ABc"  => t
+
+### Logical Operators  
+In logical operations SKILL considers `nil` as false and any other value as true.  
+Examples:  
+1. 3 && 5       => 5  
+   5 && 3       => 3  
+   t && nil     => nil  
+   nil && t     => nil  
+
+2. 3 || 5       => 3  
+   5 || 3       => 5  
+   t || nil     => t  
+   nil || t     => t  
+
