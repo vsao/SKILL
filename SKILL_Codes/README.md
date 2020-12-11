@@ -39,4 +39,13 @@ The cellview can be opened for read, append, write, or scratch mode. If you open
   sc   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same is “wc” mode, except the cellview cannot be saved to disk.
   sd   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same as “wd” mode, except the cellview cannot be saved to disk.
   ```
-- `d_contextCellView`: Specifies the context cellview. The context cellview specification is preserved for compatibility with earlier versions of the software.
+- `d_contextCellView`: Specifies the context cellview. The context cellview specification is preserved for compatibility with earlier versions of the software.  
+
+Examples  
+1. If cell “cellA” with view “layout” exists in library “test,” open the cellview for read.  
+```cellview = dbOpenCellViewByType(“test” "cellA" "layout")```  
+2. Open cell “cellA” with view “layout” in library “test” for "append" mode. Create the cellview if it does not exist.  
+```cellview = dbOpenCellViewByType("test" "cellA" "layout" "maskLayout" "a")```  
+3. Open cell "cellA" with view "layout" in library "test" for "append" mode only if the cellview already exists.  
+```cellview = dbOpenCellViewByType("test" "cellA" "layout" "" "a")```
+
