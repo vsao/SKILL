@@ -87,7 +87,7 @@ Creates a text display object.
   - `t_attrOrParamName`: Name of the attribute or the CDF parameter of the associate object specified in d_associateId.
   - `g_isParamAssoc`: Specifies whether or not t_attrOrParamName is a CDF parameter name. The default is nil.
 
-EXamples:
+Examples:
 ```
 dbCreateTextDisplay(label inst list("instance" "label") list("justify" "orient") list(0 0) "centerCenter" "R0" "roman" 2)
 dbCreateTextDisplay(net net list("wire" "label") t list(0 0) "centerCenter" "R0" "roman" 2 nil nil t t t "name")
