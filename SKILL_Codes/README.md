@@ -111,7 +111,7 @@ Returns the center point of the given bounding box. The bounding box is not vali
 Examples:
 ```
 centerBox( list( 0:0 9:9 ) ) => ( 4 4 )
-centerBox( list(0.0:0.0 9.0:9.0 ) ) => ( 4.5 4.5 )   ; Inside list x, y values are mentioned in decimal points hence return value inclues decimal points.
+centerBox( list(0.0:0.0 9.0:9.0 ) ) => ( 4.5 4.5 )   ; Inside list x, y values are mentioned in decimal points hence return value includes decimal points.
 ```
 
 
