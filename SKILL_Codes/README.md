@@ -69,8 +69,36 @@ dbCreateTextDisplay(
 Creates a text display object.
 
 - Arguments  
+  - `d_associateId`: Associate of the text display. This can be a label in a master cellview, a property, or a dbObject whose attribute t_attrName is to be displayed.
+  - `d_ownerId`: Owner of the text display. This can be any database object except properties or groups.
+  - `tx_layer`: Either the layer name or number.
+  - `t_purpose`: Purpose of the text display. The default is all.
+  - `l_displayFlags`: For properties and for attribute associates, every display characteristic must be specified; therefore, t must be specified here.
+  - `l_point`: Origin of the text display. This must be specified for properties and for object attribute associates.  
+  - `t_just`:  Justification string for the text display. This must be specified for properties and for object attribute associates.
+  - `t_orient`: Orientation string for the text display. This must be specified for properties and for object attribute associates.
+  - `t_font`: Font style string for the text display. This must be specified for properties and for object attribute associates.
+  - `x_height`: Height of the text display that must be given as a positive number. This must be specified for properties and for object attribute associates.
+  - `g_isDrafted`: Specifies whether or not drafting is set for the text display. The default is nil.
+  - `g_isOverbar`: Specifies whether or not overbar is set for the text display. The default is nil.
+  - `g_isVisible`: Specifies whether or not the text display is visible. The default is t.
+  - `g_isNameVisible`: Specifies whether or not the property or attribute name is visible. The default is t. This argument applies only to a text display with a property or attribute as its associate. 
+  - `g_isValueVisible`: Specifies whether or not the property or attribute value is visible. The default is t. This argument applies only to a text display with a property or attribute as its associate.
+  - `t_attrOrParamName`: Name of the attribute or the CDF parameter of the associate object specified in d_associateId.
+  - `g_isParamAssoc`: Specifies whether or not t_attrOrParamName is a CDF parameter name. The default is nil.
 
-d_associateId 
+EXamples:
+```
+dbCreateTextDisplay(label inst list("instance" "label") list("justify" "orient") list(0 0) "centerCenter" "R0" "roman" 2)
+dbCreateTextDisplay(net net list("wire" "label") t list(0 0) "centerCenter" "R0" "roman" 2 nil nil t t t "name")
+dbCreateTextDisplay(prop net list("wire" "label") t list(0 0) "centerCenter" "R0" "roman" 2)
+dbCreateTextDisplay(inst inst list("instance" "label") t list(0 0) "centerCenter" "R0" "roman" 2 nil nil t t t "name" t)
+```
+
+
+
+
+ 
 
 
 
