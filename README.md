@@ -205,3 +205,52 @@ Examples:
    t || nil     => t  
    nil || t     => t  
 ```
+### Branching
+- The if function  
+Example:  
+```
+colour = "Red"
+if( colour == "Red" then
+      println("colour is Red")
+      ++ colourCount
+    else
+      println("colour is not Red")
+  )
+```
+- The when & unless function  
+Examples:  
+```
+when( colour == "Red"
+        println("color is Red")
+        ++ colourCount
+    ) ;end of when 
+
+
+unless(colour == "Red" || colour == "Blue"
+        println("colour is either Red or Blue")
+        ++colourCount
+      ) ;end of unless
+```
+- The case function  
+Examples:  
+```
+case( colour
+      ( "red"
+          ++redCount
+          println("colour is Red")
+          )
+      ( "blue"
+          ++blueCount
+          println("colour is Blue")
+          )
+      ( "green"
+          ++greenCount
+          println("colour is green")
+          )
+      ( t 
+        println("colour is not red, blue or green")
+        )
+    ) ;end of case
+```
+
+The value of variable colour is compared against values red, blue and green. If SKILL finds a match then several expressions in that body are evaluated. If no match is found, the final body is evaluated.
