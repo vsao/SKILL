@@ -22,16 +22,11 @@ lt_viewName
 Opens a cellview.  
 The cellview can be opened for read, append, write, or scratch mode. If you open the cellview for the read mode, the cellview must exist. if you open the cellview for other modes, the cellview is created if it does not exist.  
 - Arguments  
-  - gt_lib | nil   
-  Specifies the ddId of a library, the name of a library t_lib, or nil. If it is nil, then a search is made for the library of context cellview d_contextCellView.   If the name of a library is given, the library must exist in the libList.  
-  - t_cellName   
-  Specifies the cell name.  
-  - lt_viewName  
-  Specifies view name of a cell such as: schematic, layout.  
-  - t_viewTypeName  
-  Specifies the view type. If it is omitted or entered as nil or “*.cdb”, the cellview must exist.  
-  - t_mode  
-  Specifies the access mode to the cellview. The mode can be one of the following values:  
+  - `gt_lib | nil`: Specifies the ddId of a library, the name of a library t_lib, or nil. If it is nil, then a search is made for the library of context cellview d_contextCellView.   If the name of a library is given, the library must exist in the libList.  
+  - `t_cellName`: Specifies the cell name.  
+  - `lt_viewName`: Specifies view name of a cell such as: schematic, layout.  
+  - `t_viewTypeName`: Specifies the view type. If it is omitted or entered as nil or “*.cdb”, the cellview must exist.  
+  - `t_mode`: Specifies the access mode to the cellview. The mode can be one of the following values:  
   ```
   r    Opens the cellview in read mode. The cellview must already exist.
   a    Opens the existing cellview in append mode. If the cellview does not exist, it is created.
@@ -44,7 +39,4 @@ The cellview can be opened for read, append, write, or scratch mode. If you open
   sc   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same is “wc” mode, except the cellview cannot be saved to disk.
   sd   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same as “wd” mode, except the cellview cannot be saved to disk.
   ```
-- d_contextCellView  
-Specifies the context cellview. The context cellview specification
-is preserved for compatibility with earlier versions of the
-software.
+- `d_contextCellView`: Specifies the context cellview. The context cellview specification is preserved for compatibility with earlier versions of the software.
