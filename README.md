@@ -254,3 +254,19 @@ case( colour
 ```
 
 The value of variable colour is compared against values red, blue and green. If SKILL finds a match then several expressions in that body are evaluated. If no match is found, the final body is evaluated.
+
+### Iteration
+- The for function
+```
+sum = 0
+for( i 1 5
+      sum = sum + i
+      println(sum)
+   )
+   
+=> 1
+   3
+   6
+   10
+   15
+```
