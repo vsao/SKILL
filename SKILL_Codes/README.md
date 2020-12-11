@@ -94,7 +94,25 @@ dbCreateTextDisplay(net net list("wire" "label") t list(0 0) "centerCenter" "R0"
 dbCreateTextDisplay(prop net list("wire" "label") t list(0 0) "centerCenter" "R0" "roman" 2)
 dbCreateTextDisplay(inst inst list("instance" "label") t list(0 0) "centerCenter" "R0" "roman" 2 nil nil t t t "name" t)
 ```
-
+### centerBox
+```
+centerBox(
+l_bBox
+)
+```
+- Description
+Returns the center point of the given bounding box. The bounding box is not validated and is assumed to be correct.
+- Arguments
+  - `l_bBox`: A list representing a bounding box.
+- Value Returned
+  - `l_point`: A list representing the center point of the bounding box.
+  - `nil`: The bounding box is not valid.
+  
+Examples:
+```
+centerBox( list( 0:0 9:9 ) ) => ( 4 4 )
+centerBox( list(0.0:0.0 9.0:9.0 ) ) => ( 4.5 4.5 )   ; Inside list x, y values are mentioned in decimal points hence return value inclues decimal points.
+```
 
 
 
