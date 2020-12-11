@@ -35,14 +35,14 @@ The cellview can be opened for read, append, write, or scratch mode. If you open
   ```
   r    Opens the cellview in read mode. The cellview must already exist.
   a    Opens the existing cellview in append mode. If the cellview does not exist, it is created.
-  w    Opens the cellview in write mode. If the cellview does not exist, it is created. If the cellview already exists, its contents is truncated in virtual              memory.
-  s    Opens the existing cellview in scratch mode. If the cellview does not exist, it is created. A cellview opened in “s” modecannot be saved to disk using            dbSave.
-  wc   Same as “w,” except that the cellview is not created as the master. This mode creates the cellview even if there is already a master under the cell and            view.
+  w    Opens the cellview in write mode. If the cellview does not exist, it is created. If the cellview already exists, its contents is truncated in virtual memory.
+  s    Opens the existing cellview in scratch mode. If the cellview does not exist, it is created. A cellview opened in “s” modecannot be saved to disk using dbSave.
+  wc   Same as “w,” except that the cellview is not created as the master. This mode creates the cellview even if there is already a master under the cell and view.
   wd   Same as “wc,” except that the context cellview must be specified. LibName is ignored if specified. The library is derived from the context cellview.
   ac   Same as “a” if the cellview already exists. If the cellview does not exist, this mode is the same as “wc” mode.
   ad   Same as “a” if the cellview already exists. If the cellview does not exist, this mode is the same as “wd” mode.
-  sc   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same is “wc” mode, except the cellview cannot be saved to            disk.
-  sd   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same as “wd” mode, except the cellview cannot be saved to            disk.
+  sc   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same is “wc” mode, except the cellview cannot be saved to disk.
+  sd   Same as “s” if the cellview already exists. If the cellview does not exist, this mode is the same as “wd” mode, except the cellview cannot be saved to disk.
   ```
 - d_contextCellView  
 Specifies the context cellview. The context cellview specification
