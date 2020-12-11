@@ -183,4 +183,9 @@ This section introduces you to
 - Multi-way Branching: case
 - Iteration: for, foreach
  
-
+### Relational Operators  
+Relational operators are used to compare data values and returns `t` or `nil` value accordingly.  
+Examples:
+1. 3 < 5           => t
+2. 10 > 2          => nil
+3. "abc" != "ABc"  => t
