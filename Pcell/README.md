@@ -143,4 +143,4 @@ let( ( lib cell libId cellId cdfId )
 Go to CIW: `Tools > CDF> Edit` and display CDF information for myCell1. It should now have two parameters.
 This completes the creation of the basic PCell.
 
-![CDF Edit](images/CDFedit.png)
+![CDF Edit](images/cdfEdit.png)
