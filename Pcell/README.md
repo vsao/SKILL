@@ -19,9 +19,7 @@ Instead of drawing shapes for an in-house custom device and risk re-doing the wh
 Circuit designers can code schematic PCells that can change pin configurations as needed.
 Parasitic techfile developers can code parallel line test structures as PCells so that the width and spacing of the test structures can be easily modified.
 
-The GPDK 45nm database (Introduction_to_SKILL_pcell_programming.tar.gz) in this document contains the scripts discussed in the subsequent slides.
-
-As basic knowledge of SKILL programming is required to follow this quide.
+As basic knowledge of SKILL programming is required to follow this guide.
 
 # PCell Supermaster and Submaster
 
@@ -58,14 +56,14 @@ pcDefinePCell(
 ) ;pcDefineCell
 ```
 The above SKILL code defines a simple PCell with the following features:
-- PCell will be created in myLib/myCell1/layout.
+- PCell will be created in TestSkill/pcell1/layout.
 - It consists of only a single rectangle.
 - The Properties form of the PCell contains two parameters, w and l, which can be used to modify the size of the rectangle.
 
 ```
-list( ddGetObj("myLib") "myCell1" "layout")
+list( ddGetObj("TestSkill") "pcell1" "layout")
 ```
-- This is a fixed syntax. Specify string inputs for library, cell, and view arguments. The `ddGetObj` command is only required for the library name. The "myLib" library should have already been pre-created in Library Manager.
+- This is a fixed syntax. Specify string inputs for library, cell, and view arguments. The `ddGetObj` command is only required for the library name. The "TestSkill" library should have already been pre-created in Library Manager.
 ```
 list((w 0.2) (l 0.1))
 ```
@@ -79,16 +77,16 @@ cv=pcCellView
 ```
 - pcCellView is an internal variable automatically created by `pcDefinePCell`. pcCellView contains the dbId (database identification) of the cell you are creating. Assigning pcCellView to "cv" is to simply shorten the name of the variable so that it can be used more conveniently.
 ```
-dbCreateRect(cv list("Metal1" "drawing") list(0:0 w:l))
+dbCreateRect(cv list("MET1" "drawing") list(0:0 w:l))
 ```
 - PCell parameters `w` and `l` are used in the dbCreateRect command so that the PCell layout can be modified according to the values defined in the Properties form. bBox (bounding box) of the rectangle will be defined by the coordinates 0:0 (lowerLeft) and w:l (upperRight).
 
 The codes can be used as follows:
 - Decompress the lab database Introduction_to_SKILL_pcell_programming.tar.gz and start Virtuoso:
 ```bash
-Linux> tar zxvf Introduction_to_SKILL_pcell_programming.tar.gz
-Linux> cd Introduction_to_SKILL_pcell_programming
-Linux> virtuoso &
+Linux> xt18-618
+Linux> cdproj
+Linux> cadstart
 ```
 Compile the PCell by loading the SKILL script in CIW:
 ```
@@ -96,15 +94,12 @@ load("./scripts/lab1.il")
 ```
 The following messages appear in CIW and the PCell myCell1 layout is generated in the myLib library.
 ```
-Generating Pcell for 'myCell1 layout'.
-Loading le.cxt
-Loading drdEdit.cxt
-Loading soi.cxt
+Generating Pcell for 'pcell1 layout'.
+t
 ```
-
 The newly generated PCell can be tested as follows:
 
-Click on  `CIW: File > Open > Cellview`, and open the cell named `lab` in myLib library. Place an instance of myLib/myCell1/layout in it. Modify w and l in the Properties form and note the changes in the PCell layout. For example, change w from 0.2 to 0.3.
+Click on  `CIW: File > Open > Cellview`, and open the cell named `lab` in myLib library. Place an instance of TestSkill/pcell1/layout in it. Modify w and l in the Properties form and note the changes in the PCell layout. For example, change w from 0.2 to 0.3.
 
 The next step is to create CDF information for the PCell. Advantages of creating CDF include:
 - Allows more variety in the input parameters (for example, instead of just a numeric field, radio fields and cyclic fields can also be used)
@@ -147,7 +142,7 @@ let( ( lib cell libId cellId cdfId )
     cdfSaveCDF( cdfId )
 ) ;let
 ```
-Go to CIW: `Tools > CDF> Edit` and display CDF information for myCell1. It should now have two parameters.
+Go to CIW: `Tools > CDF> Edit` and display CDF information for pcell1. It should now have two parameters.
 This completes the creation of the basic PCell.
 
 ![CDF Edit](images/cdfEdit.png)
