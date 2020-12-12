@@ -82,7 +82,7 @@ dbCreateRect(cv list("MET1" "drawing") list(0:0 w:l))
 - PCell parameters `w` and `l` are used in the dbCreateRect command so that the PCell layout can be modified according to the values defined in the Properties form. bBox (bounding box) of the rectangle will be defined by the coordinates 0:0 (lowerLeft) and w:l (upperRight).
 
 The codes can be used as follows:
-- Decompress the lab database Introduction_to_SKILL_pcell_programming.tar.gz and start Virtuoso:
+- Start Virtuoso:
 ```bash
 Linux> xt18-618
 Linux> cdproj
