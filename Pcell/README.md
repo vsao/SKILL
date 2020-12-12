@@ -210,7 +210,7 @@ load("./scripts/lab2_cdf.il")
 ```
 Create or open the layout cell "lab2" and place an instance of pcell2 in it. Select the instance, open the Edit Instance Properties form, and note the addition of the "layer" parameter.
 
-![Edit Instance Property](images/editInstProp.jpg)
+![Edit Instance Property](images/editInstProp.png)
 
 A simple improvement to the PCell is to enhance the CDF parameters so that they allow users to input the values easily.
 
