@@ -46,14 +46,16 @@ Regardless of the complexity, all SKILL PCell code starts with the `pcDefinePCel
 
 ## lab1.il
 ```skill
+;   Description   : Program to create a pcell that consists of a single rectangle with two parameters ‘w’ and ‘l’.
+
 pcDefinePCell(
- list( ddGetObj("myLib") "myCell1" "layout")  ;; Lib/Cell/View superMaster
- list((w 0.2) (l 0.1))                        ;; Formal parameters of PCell
- let( (cv)
-  cv=pcCellView
-  dbCreateRect(cv list("Metal1" "drawing") list(0:0 w:l)) ;; Create Rectangle
- ) ;letn
-) ;pcDefinePCell
+   list( ddGetObj("TestSkill") "pcell1" "layout")
+   list((w 0.2) (l 0.1)) 
+   let( (cv)
+      cv=pcCellView
+      dbCreateRect(cv list("MET1" "drawing") list(0:0 w:l))
+   ) ;let
+) ;pcDefineCell
 ```
 The above SKILL code defines a simple PCell with the following features:
 - PCell will be created in myLib/myCell1/layout.
@@ -119,24 +121,29 @@ load("./scripts/lab1_cdf.il")
 ```
 ## lab1_cdf.il
 ```
+;   Description   : Program to create cdf information for the pcell.
+
 let( ( lib cell libId cellId cdfId )
-   lib="myLib"
-   cell="myCell1"
+   lib="TestSkill"
+   cell="pcell1"
    unless( cellId=ddGetObj(lib cell) error("Could not get cell %s." cell))
    when( cdfId=cdfGetBaseCellCDF(cellId) cdfDeleteCDF(cdfId))
    cdfId=cdfCreateBaseCellCDF(cellId)
+
    cdfCreateParam( cdfId
        ?name           "l"
        ?prompt         "l"
        ?defValue       0.1
        ?type           "float"
    ) ;cdfCreateParam
+
    cdfCreateParam( cdfId
        ?name           "w"
        ?prompt         "w"
        ?defValue       0.2
        ?type           "float"
    ) ;cdfCreateParam
+
     cdfSaveCDF( cdfId )
 ) ;let
 ```
