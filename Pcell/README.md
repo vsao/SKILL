@@ -146,3 +146,74 @@ Go to CIW: `Tools > CDF> Edit` and display CDF information for pcell1. It should
 This completes the creation of the basic PCell.
 
 ![CDF Edit](images/cdfEdit.png)
+
+# Adding Parameters to a PCell
+
+Additional parameters can be easily added to the basic PCell by modifying the parameter line in the previous code. In the earlier SKILL code example (lab1.il), the rectangle uses a fixed layer (“MET1” “drawing”).
+In the following SKILL codes, the layer of the rectangle has been parameterized so that it can be modified in the Properties form.
+
+## lab2.il
+```
+;   Description   : Program to create a pcell that consists of a single rectangle with three parameters ‘w’, ‘l’ and 'layer'.
+
+pcDefinePCell(
+   list( ddGetObj("TestSkill") "pcell2" "layout")
+   list((w 0.2) (l 0.1) (layer "MET1")) 
+   let( (cv)
+      cv=pcCellView
+      dbCreateRect(cv list(layer "drawing") list(0:0 w:l))
+   ) ;let
+) ;pcDefineCell
+```
+The corresponding CDF creation script is:
+
+## lab2_cdf.il
+```
+;   Description   : Program to create cdf information for the pcell.
+
+let( ( lib cell libId cellId cdfId )
+   lib="TestSkill"
+   cell="pcell2"
+   unless( cellId=ddGetObj(lib cell) error("Could not get cell %s." cell))
+   when( cdfId=cdfGetBaseCellCDF(cellId) cdfDeleteCDF(cdfId))
+   cdfId=cdfCreateBaseCellCDF(cellId)
+
+   cdfCreateParam( cdfId
+       ?name           "layer"
+       ?prompt         "layer"
+       ?defValue       "MET1"
+       ?type           "string"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "l"
+       ?prompt         "l"
+       ?defValue       0.1
+       ?type           "float"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "w"
+       ?prompt         "w"
+       ?defValue       0.2
+       ?type           "float"
+   ) ;cdfCreateParam
+
+    cdfSaveCDF( cdfId )
+) ;let
+```
+The new PCell and CDF codes can be used as follows:
+Load the following scripts in CIW:
+```
+load("./scripts/lab2.il")
+load("./scripts/lab2_cdf.il")
+```
+Create or open the layout cell "lab2" and place an instance of pcell2 in it. Select the instance, open the Edit Instance Properties form, and note the addition of the "layer" parameter.
+
+![Edit Instance Property](images/editInstProp.jpg)
+
+A simple improvement to the PCell is to enhance the CDF parameters so that they allow users to input the values easily.
+
+![CDF Modification](images/CDFmod.jpg)
+
+For example, instead of using a simple string field, which is prone to typos from users, a cyclic field can be used for layer input. This can be done by modifying the CDF codes as shown below and reloading the lab2_cdf.il file in CIW.
