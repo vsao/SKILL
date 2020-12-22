@@ -277,7 +277,6 @@ let( ( lib cell libId cellId cdfId )
 	cdfSaveCDF( cdfId )
 ) ;let
 ```
-![Constructor](images/constructor.jpg)
 
 Advantages of using constructor functions include:
 - Modularize the codes and makes debugging easier
