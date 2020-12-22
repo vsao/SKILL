@@ -297,3 +297,140 @@ The file containing the constructor functions should be loaded first so that the
 
 As the codes that create the PCell are now separated from the pcDefinePCell function and hence, are not compiled directly into the PCell layout, they need to be always loaded once before the PCell can be used.
 
+# CDF Callback Procedure
+## lab5_constructor.il
+```
+procedure( CCScreatePcell5(cv w l layer)
+   let( ()
+      dbCreateRect(cv list(layer "drawing") list(0:0 w:l))
+   ) ;let
+) ;procedure
+```
+
+## lab5_callback.il
+```
+procedure( CCScheckParamValue5(param)
+   let( (paramError value)
+      paramError=nil
+      value=cdfFindParamByName(cdfgData symbolToString(param))->value
+      print("vishal1")
+      case( param
+         (w
+            cond(
+               (value<0.2
+                  paramError=t
+                  value=0.2
+                  print("vishal2")
+               ) ;0.2
+                (value>2.0
+                  paramError=t
+                  value=2.0
+                  print("vishal3")
+               ) ;2.0
+            ) ;cond
+         ) ;w
+         (l
+            cond(
+               (value<0.1
+                  paramError=t
+                  value=0.1
+                  print("vishal3")
+               ) ;0.1
+                (value>0.5
+                  paramError=t
+                  value=0.5
+                  print("vishal4")
+               ) ;0.5
+            ) ;cond
+         ) ;l
+      ) ;case
+            
+      cdfFindParamByName(cdfgData symbolToString(param))->value=value
+      when(paramError
+         print("vishal5")
+         case( param
+            (w error("Value of w must be within the range [0.2u,2.0u]"))
+            (l error("Value of l must be within the range [0.1u,0.5u]"))
+            print("vishal6")
+         ) ;case
+      ) ;when
+   ) ;let
+) ;procedure
+```
+
+## lab5_cdf.il
+```
+let( ( lib cell view libId cellId cdfId )
+   lib="TestSkill"
+   cell="pcell5"
+   view="layout"
+
+   unless( ddGetObj(lib cell view)
+      dbOpenCellViewByType(lib cell view "maskLayout" "w")
+   ) ;unless
+
+   unless( cellId=ddGetObj(lib cell) error("Could not get cell %s." cell))
+   when( cdfId=cdfGetBaseCellCDF(cellId) cdfDeleteCDF(cdfId))
+   cdfId=cdfCreateBaseCellCDF(cellId)
+
+   cdfCreateParam( cdfId
+       ?name           "layer"
+       ?prompt         "layer"
+       ?defValue       "MET1"
+       ?choices        '("MET1" "MET2" "MET3")
+       ?type           "cyclic"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "l"
+       ?prompt         "l"
+       ?defValue       0.1
+       ?type           "float"
+       ?callback       "CCScheckParamValue5('l)"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "w"
+       ?prompt         "w"
+       ?defValue       0.2
+       ?type           "float"
+       ?callback       "CCScheckParamValue5('w)"
+   ) ;cdfCreateParam
+
+    cdfSaveCDF( cdfId )
+) ;let
+```
+
+## lab5.il
+```
+lib="TestSkill"
+cell="pcell5"
+cdf=cdfGetBaseCellCDF(ddGetObj(lib cell))
+
+pcDefinePCell( 
+   list( ddGetObj(lib) cell "layout")
+   list(
+      (w "float" cdf->w->defValue)
+      (l "float" cdf->l->defValue)
+      (layer "string" cdf->layer->defValue)
+   ) ;list
+   let( (cv)
+      cv=pcCellView
+      CCScreatePcell5(cv w l layer)
+   ) ;let
+) ;pcDefinePCell
+
+lib=nil
+cell=nil
+cdf=nil 
+```
+Load the files in CIW in the following order:
+```
+load("./constructor.il")
+load("./callback.il")
+load("./cdf.il")
+load("./pcell.il")
+```
+Next, create or open the layout cell "lab5" and place an instance of pcell5 to test it. callback procedure is called whenever user places an instance of pcell5 and trys to change the w, l value of the cell. The callback procedure sets the minimum and maximum value of the w and l parameters. In this case value of w is in between 0.2 to 2, whereas l can be in between 0.1 to 1. Change w, l parameter and check the whether w and l values are in between the desired range.
+
+ 
