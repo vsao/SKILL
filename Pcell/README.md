@@ -313,19 +313,16 @@ procedure( CCScheckParamValue5(param)
    let( (paramError value)
       paramError=nil
       value=cdfFindParamByName(cdfgData symbolToString(param))->value
-      print("vishal1")
       case( param
          (w
             cond(
                (value<0.2
                   paramError=t
                   value=0.2
-                  print("vishal2")
                ) ;0.2
                 (value>2.0
                   paramError=t
                   value=2.0
-                  print("vishal3")
                ) ;2.0
             ) ;cond
          ) ;w
@@ -334,12 +331,10 @@ procedure( CCScheckParamValue5(param)
                (value<0.1
                   paramError=t
                   value=0.1
-                  print("vishal3")
                ) ;0.1
                 (value>0.5
                   paramError=t
                   value=0.5
-                  print("vishal4")
                ) ;0.5
             ) ;cond
          ) ;l
@@ -347,16 +342,17 @@ procedure( CCScheckParamValue5(param)
             
       cdfFindParamByName(cdfgData symbolToString(param))->value=value
       when(paramError
-         print("vishal5")
          case( param
             (w error("Value of w must be within the range [0.2u,2.0u]"))
             (l error("Value of l must be within the range [0.1u,0.5u]"))
-            print("vishal6")
          ) ;case
       ) ;when
    ) ;let
 ) ;procedure
 ```
+
+- ```cdfFindParamByName(g_cdfDataId t_name)```: Returns the parameter ID for the specified parameter name on the specified CDF description, if it exists. If not, it returns nil.  
+- ```symbolToString(s_symbolName)```: It converts a symbol to a string of the same name.  
 
 ## lab5_cdf.il
 ```
