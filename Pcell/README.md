@@ -351,8 +351,8 @@ procedure( CCScheckParamValue5(param)
 ) ;procedure
 ```
 
-```cdfFindParamByName(g_cdfDataId t_name)```: Returns the parameter ID for the specified parameter name on the specified CDF description, if it exists. If not, it returns nil.  
-```symbolToString(s_symbolName)```: It converts a symbol to a string of the same name.  
+- ```cdfFindParamByName(g_cdfDataId t_name)```: Returns the parameter ID for the specified parameter name on the specified CDF description, if it exists. If not, it returns nil.  
+- ```symbolToString(s_symbolName)```: It converts a symbol to a string of the same name.  
 
 ## lab5_cdf.il
 ```
