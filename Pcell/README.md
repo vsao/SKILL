@@ -351,6 +351,9 @@ procedure( CCScheckParamValue5(param)
 ) ;procedure
 ```
 
+```cdfFindParamByName(g_cdfDataId t_name)```: Returns the parameter ID for the specified parameter name on the specified CDF description, if it exists. If not, it returns nil.  
+```symbolToString(s_symbolName)```: It converts a symbol to a string of the same name.  
+
 ## lab5_cdf.il
 ```
 let( ( lib cell view libId cellId cdfId )
@@ -417,11 +420,6 @@ lib=nil
 cell=nil
 cdf=nil 
 ```
-
-```cdfFindParamByName(g_cdfDataId t_name)```: Returns the parameter ID for the specified parameter name on the specified CDF description, if it exists. If not, it returns nil.  
-```symbolToString(s_symbolName)```: It converts a symbol to a string of the same name.  
-
-
 Load the files in CIW in the following order:
 ```
 load("./constructor.il")
