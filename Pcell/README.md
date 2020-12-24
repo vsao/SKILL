@@ -577,7 +577,8 @@ rect = rodCreateRect(
 )
 ```
 
-![Rectangle](images/rectangle.png)
+<img title="Rectangle" src="images/rectangle.png" width="500" length="500"> 
+
 
 ## Creating a ROD Polygon
 A ROD Polygon can be created by typing below mentioned commands in the Command Interpreter Window (CIW): 
@@ -590,7 +591,7 @@ polygon = rodCreatePolygon(
 )
 ```
 
-![Polygon](images/polygon.png)
+<img title="Polygon" src="images/polygon.png" width="500" length="500"> 
 
 ## About ROD Handles
 Important attributes of ROD objects are their handles. Handles are used to store points, calculations, and other information. In the Edit Properties form you can view the handle data in the ROD fields.
@@ -610,7 +611,7 @@ To create a user-defined handle,
    
 2. Note the change in the User handle field. We may have to deselect and then reselect the polygon to refresh the form. The value should reflect what we set to create the user handle.
 
-![User Handle](images/user_handle.png)
+<img title="User Handle" src="images/user_handle.png" width="500" length="500"> 
 
 ## Aligning the ROD Polygon and Rectangle
 An important feature of ROD is the ability to specify the position of one named object in relation to another named object. This is called relative alignment. Usually, we align objects by specifying a point handle on each object. We can also specify the distance between the two objects in the direction of the X axis, the Y axis, or both. The alignment between two objects is preserved when you manipulate either object and when we save and close the layout cellview. In this section, we align the polygon and rectangle. The reference object is the rectangle and the reference handle is centerRIght. The align object is the polygon and the align handle is topCenter. Remember, topCenter is the user handle we just created.  
@@ -623,6 +624,5 @@ rodAlign(
 ?refHandle "centerRight"
 )
 ```
-
-![Align Rectangle and Polygon](images/align.png)
+<img title="Align Rectangle and Polygon" src="images/align.png" width="500" length="500"> 
 
