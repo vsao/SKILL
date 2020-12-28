@@ -586,7 +586,7 @@ A ROD Polygon can be created by typing below mentioned commands in the Command I
 polygon = rodCreatePolygon(
 ?name "polygon"
 ?cvId geGetEditCellView()
-?layer “MET1"
+?layer "MET1"
 ?pts list(11:11 11:7 17:7 17:9 13:9 13:11)
 )
 ```
@@ -614,7 +614,7 @@ To create a user-defined handle,
 <img title="User Handle" src="images/user_handle.png" width="500" length="500"> 
 
 ## Aligning the ROD Polygon and Rectangle
-An important feature of ROD is the ability to specify the position of one named object in relation to another named object. This is called relative alignment. Usually, we align objects by specifying a point handle on each object. We can also specify the distance between the two objects in the direction of the X axis, the Y axis, or both. The alignment between two objects is preserved when you manipulate either object and when we save and close the layout cellview. In this section, we align the polygon and rectangle. The reference object is the rectangle and the reference handle is centerRIght. The align object is the polygon and the align handle is topCenter. Remember, topCenter is the user handle we just created.  
+An important feature of ROD is the ability to specify the position of one named object in relation to another named object. This is called relative alignment. Usually, we align objects by specifying a point handle on each object. We can also specify the distance between the two objects in the direction of the X axis, the Y axis, or both. The alignment between two objects is preserved when you manipulate either object and when we save and close the layout cellview. In this section, we align the polygon and rectangle. The reference object is the rectangle and the reference handle is centerRight. The align object is the polygon and the align handle is topCenter. Remember, topCenter is the user handle we just created.  
 In the CIW, type  
 ```
 rodAlign(
@@ -625,4 +625,245 @@ rodAlign(
 )
 ```
 <img title="Align Rectangle and Polygon" src="images/align.png" width="500" length="500"> 
+
+
+# creating a mosfet pcell
+## lab6_constrctor.il
+```
+procedure( CCScreatePcell6(cv w l)
+   let( (drainRod sourceRod bodyRod gateRod drainMetRod sourceMetRod)
+      drainRod=rodCreateRect(
+         ?cvId cv
+         ?layer "DIFF"
+         ?bBox list(0:0 l:w)
+         ?netName "D"
+         ?termName "D"
+         ?termIOType "inputOutput"
+         ?pin t
+      ) ;rodCreateRect
+
+      sourceRod=rodCreateRect(
+         ?cvId cv
+         ?layer "DIFF"
+         ?bBox list(0:0 l:w)
+         ?netName "S"
+         ?termName "S"
+         ?termIOType "inputOutput"
+         ?pin t
+      ) ;rodCreateRect
+
+      bodyRod=rodCreateRect(
+         ?cvId cv
+         ?layer "DIFF"
+         ?bBox list(0:0 l:w)
+      ) ;rodCreateRect
+
+      gateRod=rodCreateRect(
+         ?cvId cv
+         ?layer "POLY1"
+         ?bBox list(0:0 l:w*1.4)
+      ) ;rodCreateRect
+
+      contRod1=rodCreateRect(
+         ?cvId cv
+         ?layer "CONT"
+         ?bBox list(0:0 0.05:0.05)
+      ) ;rodCreateRect
+
+      contRod2=rodCreateRect(
+         ?cvId cv
+         ?layer "CONT"
+         ?bBox list(0:0 0.05:0.05)
+      ) ;rodCreateRect
+
+      nimpRod=rodCreateRect(
+         ?cvId cv
+         ?layer "NIMP"
+         ?bBox list(0:0 3.6*l:w*1.2)
+      ) ;rodCreateRect
+
+      rodAlign(
+         ?alignObj drainRod
+         ?alignHandle "lowerRight"
+         ?refObj bodyRod
+         ?refHandle "lowerLeft"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj sourceRod
+         ?alignHandle "lowerLeft"
+         ?refObj bodyRod
+         ?refHandle "lowerRight"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj gateRod
+         ?alignHandle "centerCenter"
+         ?refObj bodyRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      drainMetRod=rodCreateRect(
+         ?cvId cv
+         ?layer "MET1"
+         ?bBox list(0:0 l*0.8:w*0.8)
+         ?netName "D"
+         ?pin t
+      ) ;rodCreateRect
+
+      sourceMetRod=rodCreateRect(
+         ?cvId cv
+         ?layer "MET1"
+         ?bBox list(0:0 l*0.8:w*0.8)
+         ?netName "S"
+         ?pin t
+      ) ;rodCreateRect
+
+      rodAlign(
+         ?alignObj nimpRod
+         ?alignHandle "centerCenter"
+         ?refObj gateRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj drainMetRod
+         ?alignHandle "centerCenter"
+         ?refObj drainRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj sourceMetRod
+         ?alignHandle "centerCenter"
+         ?refObj sourceRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj contRod1
+         ?alignHandle "centerCenter"
+         ?refObj drainMetRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj contRod2
+         ?alignHandle "centerCenter"
+         ?refObj sourceMetRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+   ) ;let
+) ;procedure
+```
+## lab6_cdf.il
+```
+let( ( lib cell view libId cellId cdfId )
+   lib="TestSkill"
+   cell="pcell6"
+   view="layout"
+
+   unless( ddGetObj(lib cell view)
+      dbOpenCellViewByType(lib cell view "maskLayout" "w")
+   ) ;unless
+
+   unless( cellId=ddGetObj(lib cell) error("Could not get cell %s." cell))
+   when( cdfId=cdfGetBaseCellCDF(cellId) cdfDeleteCDF(cdfId))
+   cdfId=cdfCreateBaseCellCDF(cellId)
+
+   cdfCreateParam( cdfId
+       ?name           "l"
+       ?prompt         "l"
+       ?defValue       0.1
+       ?type           "float"
+       ?callback       "CCScheckParamValue6('l)"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "w"
+       ?prompt         "w"
+       ?defValue       0.3
+       ?type           "float"
+       ?callback       "CCScheckParamValue6('w)"
+   ) ;cdfCreateParam
+
+    cdfSaveCDF( cdfId )
+) ;let
+```
+## lab6_callback.il
+```
+procedure( CCScheckParamValue6(param)
+   let( (paramError value)
+      paramError=nil
+      value=cdfFindParamByName(cdfgData symbolToString(param))->value
+      case( param
+         (w
+            cond(
+               (value<0.2
+                  paramError=t
+                  value=0.2
+               ) ;0.2
+                (value>2.0
+                  paramError=t
+                  value=2.0
+               ) ;2.0
+            ) ;cond
+         ) ;w
+         (l
+            cond(
+               (value<0.1
+                  paramError=t
+                  value=0.1
+               ) ;0.1
+                (value>0.5
+                  paramError=t
+                  value=0.5
+               ) ;0.5
+            ) ;cond
+         ) ;l
+      ) ;case
+            
+      cdfFindParamByName(cdfgData symbolToString(param))->value=value
+      when(paramError
+         case( param
+            (w error("Value of w must be within the range [0.2u,2.0u]"))
+            (l error("Value of l must be within the range [0.1u,0.5u]"))
+         ) ;case
+      ) ;when
+   ) ;let
+) ;procedure
+```
+## lab6.il
+
+```
+lib="TestSkill"
+cell="pcell6"
+cdf=cdfGetBaseCellCDF(ddGetObj(lib cell))
+
+pcDefinePCell(
+   list(ddGetObj(lib) cell "layout")
+   list(
+      (w "float" cdf->w->defValue)
+      (l "float" cdf->l->defValue)
+   ) ;list
+   let( (cv)
+      cv=pcCellView
+      CCScreatePcell6(cv w l)
+   ) ;let
+) ;pcDefinePCell
+
+lib=nil
+cell=nil
+cdf=nil
+```
+
+Load the files in CIW in the following order:
+load("./constructor.il")
+load("./callback.il")
+load("./cdf.il")
+load("./pcell.il")
+
+<img title="Pcell nmos" src="images/nmos_pcell.png" width="500" length="500"> 
+
 
