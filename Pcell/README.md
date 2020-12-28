@@ -858,11 +858,11 @@ cell=nil
 cdf=nil
 ```
 
-Load the files in CIW in the following order:
-load("./constructor.il")
-load("./callback.il")
-load("./cdf.il")
-load("./pcell.il")
+Load the files in CIW in the following order:  
+load("./constructor.il")  
+load("./callback.il")  
+load("./cdf.il")  
+load("./pcell.il")  
 
 <img title="Pcell nmos" src="images/nmos_pcell.png" width="500" length="500"> 
 
