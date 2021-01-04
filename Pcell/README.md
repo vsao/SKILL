@@ -1070,5 +1070,5 @@ load("./callback.il")
 load("./cdf.il")  
 load("./pcell.il")  
 
-<img title="Pcell std_nmos" src="images/std_nmos.png" width="500" length="500"> 
+<img title="Pcell std_nmos" src="images/std_nmos.png" width="400" length="500"> 
 
