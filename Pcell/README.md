@@ -1075,4 +1075,4 @@ load("./pcell.il")
 
 <img title="Pcell std_nmos" src="images/std_nmos.png" width="400" length="500"> 
 
->>>>>>> 40ea5e5df48cdfc80de279cc4e17ee0b6db40e54
+1234
