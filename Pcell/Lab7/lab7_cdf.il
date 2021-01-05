@@ -1,31 +1,30 @@
-let( ( lib cell libId cellId cdfId )
+let( ( lib cell view libId cellId cdfId )
    lib="TestSkill"
-   cell="pcell3"
+   cell="pcell7"
+   view="layout"
+
+   unless( ddGetObj(lib cell view)
+      dbOpenCellViewByType(lib cell view "maskLayout" "w")
+   ) ;unless
 
    unless( cellId=ddGetObj(lib cell) error("Could not get cell %s." cell))
    when( cdfId=cdfGetBaseCellCDF(cellId) cdfDeleteCDF(cdfId))
    cdfId=cdfCreateBaseCellCDF(cellId)
 
    cdfCreateParam( cdfId
-       ?name           "layer"
-       ?prompt         "layer"
-       ?defValue       "MET1"
-       ?choices        '("MET1" "MET2" "MET3")
-       ?type           "cyclic"
-   ) ;cdfCreateParam
-
-   cdfCreateParam( cdfId
        ?name           "l"
        ?prompt         "l"
-       ?defValue       0.1
+       ?defValue       0.18
        ?type           "float"
+       ?callback       "CCScheckParamValue7('l)"
    ) ;cdfCreateParam
 
    cdfCreateParam( cdfId
        ?name           "w"
        ?prompt         "w"
-       ?defValue       0.2
+       ?defValue       2.0
        ?type           "float"
+       ?callback       "CCScheckParamValue7('w)"
    ) ;cdfCreateParam
 
     cdfSaveCDF( cdfId )

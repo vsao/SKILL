@@ -1,5 +1,5 @@
 lib="TestSkill"
-cell="pcell6"
+cell="pcell7"
 cdf=cdfGetBaseCellCDF(ddGetObj(lib cell))
 
 pcDefinePCell(
@@ -10,7 +10,7 @@ pcDefinePCell(
    ) ;list
    let( (cv)
       cv=pcCellView
-      CCScreatePcell6(cv w l)
+      CCScreatePcell7(cv w l)
    ) ;let
 ) ;pcDefinePCell
 

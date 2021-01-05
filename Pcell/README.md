@@ -812,10 +812,10 @@ procedure( CCScheckParamValue6(param)
          ) ;w
          (l
             cond(
-               (value<0.1
+               (value<0.18
                   paramError=t
-                  value=0.1
-               ) ;0.1
+                  value=0.18
+               ) ;0.18
                 (value>0.5
                   paramError=t
                   value=0.5
@@ -828,7 +828,7 @@ procedure( CCScheckParamValue6(param)
       when(paramError
          case( param
             (w error("Value of w must be within the range [0.2u,2.0u]"))
-            (l error("Value of l must be within the range [0.1u,0.5u]"))
+            (l error("Value of l must be within the range [0.18u,0.5u]"))
          ) ;case
       ) ;when
    ) ;let
@@ -858,12 +858,221 @@ cell=nil
 cdf=nil
 ```
 
-Load the files in CIW in the following order:
-load("./constructor.il")
-load("./callback.il")
-load("./cdf.il")
-load("./pcell.il")
+Load the files in CIW in the following order:  
+load("./constructor.il")  
+load("./callback.il")  
+load("./cdf.il")  
+load("./pcell.il")  
 
 <img title="Pcell nmos" src="images/nmos_pcell.png" width="500" length="500"> 
 
+<<<<<<< HEAD
 Vishal
+=======
+# Modifications in a NMOS pcell
+
+Here we are trying to create a standard xfab NMOS with array of diffusion contacts and align them one by one. Except lab6 constructor function all the SKILL files are same.
+
+## lab7_constructor.il
+```
+procedure( CCScreatePcell7(cv w l)
+   let( (drainRod sourceRod bodyRod gateRod drainMetRod sourceMetRod)
+      drainRod=rodCreateRect(
+         ?cvId cv
+         ?layer "DIFF"
+         ?bBox list(0:0 0.48:w)
+         ?netName "D"
+         ?termName "D"
+         ?termIOType "inputOutput"
+         ?pin t
+      ) ;rodCreateRect
+
+      sourceRod=rodCreateRect(
+         ?cvId cv
+         ?layer "DIFF"
+         ?bBox list(0:0 0.48:w)
+         ?netName "S"
+         ?termName "S"
+         ?termIOType "inputOutput"
+         ?pin t
+      ) ;rodCreateRect
+
+      bodyRod=rodCreateRect(
+         ?cvId cv
+         ?layer "DIFF"
+         ?bBox list(0:0 l:w)
+      ) ;rodCreateRect
+
+      gateRod=rodCreateRect(
+         ?cvId cv
+         ?layer "POLY1"
+         ?bBox list(0:0 l:2.44)
+      ) ;rodCreateRect
+
+arrayOfDiffCon0  = rodCreateRect( ?cvId cv
+				  ?name "arrayOfDiffCon0" 
+				  ?layer "CONT" 
+				  ?width 0.22
+				  ?length 0.22
+            			  ?elementsX 1 
+                                  ?elementsY 4 
+				  ?spaceY 0.225 )
+
+arrayOfDiffCon1  = rodCreateRect( ?cvId cv
+				  ?name "arrayOfDiffCon1" 
+				  ?layer "CONT" 
+				  ?width 0.22
+				  ?length 0.22
+            			  ?elementsX 1 
+                                  ?elementsY 4 
+				  ?spaceY 0.225 )
+
+      nimpRod=rodCreateRect(
+         ?cvId cv
+         ?layer "NIMP"
+         ?bBox list(0:0 (1.48+l):2.7)
+      ) ;rodCreateRect
+
+      drainMetRod=rodCreateRect(
+         ?cvId cv
+         ?layer "MET1"
+         ?bBox list(0:0 0.34:w*0.96)
+         ?netName "D"
+         ?pin t
+      ) ;rodCreateRect
+
+      sourceMetRod=rodCreateRect(
+         ?cvId cv
+         ?layer "MET1"
+         ?bBox list(0:0 0.34:w*0.96)
+         ?netName "S"
+         ?pin t
+      ) ;rodCreateRect
+
+      rodAlign(
+         ?alignObj drainRod
+         ?alignHandle "lowerRight"
+         ?refObj bodyRod
+         ?refHandle "lowerLeft"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj sourceRod
+         ?alignHandle "lowerLeft"
+         ?refObj bodyRod
+         ?refHandle "lowerRight"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj gateRod
+         ?alignHandle "centerCenter"
+         ?refObj bodyRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj nimpRod
+         ?alignHandle "centerCenter"
+         ?refObj gateRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj drainMetRod
+         ?alignHandle "centerCenter"
+         ?refObj drainRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj sourceMetRod
+         ?alignHandle "centerCenter"
+         ?refObj sourceRod
+         ?refHandle "centerCenter"
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon0.1" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj drainMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep 0.06
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon0.2" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj drainMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep (0.37+0.22)
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon0.3" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj drainMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep (0.68+0.22+0.22)
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon0.4" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj drainMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep (0.99+0.22+0.22+0.22)
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon1.1" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj sourceMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep 0.06
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon1.2" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj sourceMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep (0.37+0.22)
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon1.3" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj sourceMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep (0.68+0.22+0.22)
+      ) ;rodAlign
+
+      rodAlign(
+         ?alignObj rodGetObj("arrayOfDiffCon1.4" cv)
+         ?alignHandle "lowerCenter"
+         ?refObj sourceMetRod
+         ?refHandle "lowerCenter"
+         ?xSep 0.0
+         ?ySep (0.99+0.22+0.22+0.22)
+      ) ;rodAlign
+
+   ) ;let
+) ;procedure
+
+```
+Load the files in CIW in the following order:  
+load("./constructor.il")  
+load("./callback.il")  
+load("./cdf.il")  
+load("./pcell.il")  
+
+<img title="Pcell std_nmos" src="images/std_nmos.png" width="400" length="500"> 
+
+>>>>>>> 40ea5e5df48cdfc80de279cc4e17ee0b6db40e54

@@ -1,17 +1,16 @@
 lib="TestSkill"
-cell="pcell5"
+cell="pcell7"
 cdf=cdfGetBaseCellCDF(ddGetObj(lib cell))
 
-pcDefinePCell( 
-   list( ddGetObj(lib) cell "layout")
+pcDefinePCell(
+   list(ddGetObj(lib) cell "layout")
    list(
       (w "float" cdf->w->defValue)
       (l "float" cdf->l->defValue)
-      (layer "string" cdf->layer->defValue)
    ) ;list
    let( (cv)
       cv=pcCellView
-      CCScreatePcell5(cv w l layer)
+      CCScreatePcell7(cv w l)
    ) ;let
 ) ;pcDefinePCell
 
