@@ -445,6 +445,7 @@ Next, create or open the layout cell "lab5" and place an instance of pcell5 to t
   - names of system-defined handles
 
 ## ROD functions
+- rodCreateRect()
 ```
 rodCreateRect(  
 [ ?name S_name ]  
@@ -508,22 +509,7 @@ list(
   
 Creates a single named rectangle, one or more rows and/or columns of named rectangles, or fills a bounding box with named rectangles, where each rectangle has ROD attributes. You can create these named rectangles with the arguments S_name through g_returnBoolean. Each named rectangle is a separate object, created at level zero in the hierarchy. You can also create multipart rectangles by specifying one or more arrays of unnamed subrectangles for each named rectangle, where each unnamed subrectangle is an ordinary database shape, with no ROD attributes, created at level zero in the hierarchy. The named rectangles in a multipart rectangle are referred to as master rectangles.
 
-```
-rodAlign(  
-[ ?alignObj R_alignObj ]  
-[ ?alignHandle S_alignHandle ]  
-[ ?refObj R_refObj ]  
-[ ?refHandle S_refHandle ]  
-[ ?refPoint l_refPoint ]  
-[ ?maintain g_maintain ]  
-[ ?xSep txf_xSep ]  
-[ ?ySep txf_ySep ]  
-)  
-=> R_rodObj / nil  
-```
- 
-Aligns a named object by a point handle on that object to a specific point or to a point handle on a reference object. You can align objects that are at different levels of hierarchy as long as both objects are in the same top-level layout cellview. You can specify positive or negative separation between alignment points in the direction of both the X and Y axes, either as absolute distances or with Cadence SKILL language expressions. The system applies the offset from the reference point or reference object to the object to be aligned.
-
+- rodCreatePolygon()
 ```
 rodCreatePolygon(  
 [ ?name S_name ]  
@@ -554,6 +540,7 @@ rodCreatePolygon(
 
 Creates one polygon from a list of points or from one or more named objects. Also creates a ROD object containing information associated with the polygon, including its name and database ID. The associated ROD object is identified by a ROD object ID. The polygon is created at level zero in the hierarchy. You can assign a property name and value, or a list of property names and values, to the polygon. You can specify connectivity for the polygon by associating it with a specific terminal and net. You can also make the polygon into a pin.
 
+- rodCreateHandle()
 ```
 rodCreateHandle(  
 [ ?name S_name ]  
@@ -565,6 +552,124 @@ rodCreateHandle(
 ```
 
 Creates a user-defined handle for any ROD object (named shape, instance, or cellview); the object must be at level zero in the hierarchy. For example, you can create a handle for polyRect or for instance I1, but not for I1/polyRect.
+
+- rodCreatePath()
+```
+rodCreatePath(  
+[ ?name S_name]  
+[ ?layer txl_layer ]  
+[ ?width n_width ]  
+[ ?pts l_pts ]  
+[ ?justification S_justification ]  
+[ ?offset n_offset ]  
+[ ?endType S_endType ]  
+[ ?beginExt n_beginExt ]  
+[ ?endExt n_endExt ]  
+[ ?choppable g_choppable ]  
+[ ?cvId d_cvId ]  
+[ ?fromObj Rl_fromObj ]  
+[ ?size txf_size ]  
+[ ?startHandle l_startHandle ]  
+[ ?endHandle l_endHandle ]  
+[ ?prop l_prop ]  
+  
+[rodConnectivityArgs... ]  
+;start ROD Connectivity Arguments (rodConnectivityArgs)  
+[ ?netName S_netName ]  
+[ ?termName S_termName ]  
+[ ?termIOType S_termIOType ]  
+[ ?pin g_pin ]  
+[ ?pinAccessDir tl_pinAccessDir ]  
+[ ?pinLabel g_pinLabel ]  
+[ ?pinLabelHeight n_pinLabelHeight ]  
+[ ?pinLabelLayer txl_pinLabelLayer ]  
+[ ?pinLabelFont S_pinLabelFont ]  
+[ ?pinLabelDrafting g_pinLabelDrafting ]  
+[ ?pinLabelOrient S_pinLabelOrient ]  
+[ ?pinLabelOffsetPoint l_pinLabelOffsetPoint ]  
+[ ?pinLabelJust S_pinLabelJust ]  
+[ ?pinLabelRefHandle S_pinLabelRefHandle ]  
+;end ROD Connectivity Arguments  
+  
+[ ?offsetSubPath l_offsetSubpathArgs... ]  
+;start Offset Subpath Arguments (l_offsetSubpathArgs)  
+list(  
+list(  
+[ ?layer txl_layer ]  
+[ ?width n_width ]  
+[ ?sep n_sep ]  
+[ ?justification S_justification ]  
+[ ?beginOffset n_beginOffset ]  
+[ ?endOffset n_endOffset ]  
+[ ?choppable g_choppable ]  
+[ ?prop l_prop ]  
+;repeat ROD Connectivity Arguments here  
+);end first offset subpath list  
+...  
+);end offset subpath lists  
+;end Offset Subpath Arguments  
+  
+[ ?encSubPath l_encSubpathArgs... ]  
+;start Enclosure Subpath Arguments (l_encSubpathArgs)  
+list(  
+list(  
+[ ?layer txl_layer ]  
+[ ?enclosure n_enclosure ]  
+[ ?beginOffset n_beginOffset ]  
+[ ?endOffset n_endOffset ]  
+[ ?choppable g_choppable ]  
+[ ?prop l_prop ]  
+;repeat ROD Connectivity Arguments here  
+);end first enclosure subpath list  
+...  
+;end of enclosure subpath lists  
+;end Enclosure Subpath Arguments  
+  
+[ ?subRect l_subrectArgs... ]  
+;start Subrectangle Arguments (l_subrectArgs)  
+list(  
+list(  
+[ ?layer txl_layer ]  
+[ ?width n_width ]  
+[ ?length n_length ]  
+[ ?gap S_gap ]  
+[ ?sep n_sep ]  
+[ ?justification S_justification ]  
+[ ?beginOffset n_beginOffset ]  
+[ ?endOffset n_endOffset ]  
+[ ?beginSegOffset n_beginSegOffset ]  
+[ ?endSegOffset n_endSegOffset ]  
+[ ?space n_space ]  
+[ ?choppable g_choppable ]  
+[ ?prop l_prop ]  
+;repeat ROD Connectivity Arguments here  
+[ ?diagonal g_diagonalSubRect ]  
+);end first subrectangle list  
+...  
+;end subrectangle lists  
+);end Subrectangle Arguments  
+)  
+=> R_rodObj / nil  
+```  
+Creates a path consisting of one or more parts at level zero in the hierarchy on the same or on different layers from a list of points or from one or more existing objects. A path consisting of multiple parts is called a multipart path. You can use the `rodCreatePath` function to create one-part paths, simple multipart paths, or complex multipart paths such as guard rings, transistors, buses, and shielded paths. You can assign one or more property names and values to a multipart path.
+
+- rodAlign()
+```
+rodAlign(  
+[ ?alignObj R_alignObj ]  
+[ ?alignHandle S_alignHandle ]  
+[ ?refObj R_refObj ]  
+[ ?refHandle S_refHandle ]  
+[ ?refPoint l_refPoint ]  
+[ ?maintain g_maintain ]  
+[ ?xSep txf_xSep ]  
+[ ?ySep txf_ySep ]  
+)  
+=> R_rodObj / nil  
+```
+ 
+Aligns a named object by a point handle on that object to a specific point or to a point handle on a reference object. You can align objects that are at different levels of hierarchy as long as both objects are in the same top-level layout cellview. You can specify positive or negative separation between alignment points in the direction of both the X and Y axes, either as absolute distances or with Cadence SKILL language expressions. The system applies the offset from the reference point or reference object to the object to be aligned.
+
 
 ## Creating a ROD Rectangle
 We can create a ROD rectangle by typing below mentioned commands in the Command Interpreter Window (CIW): 
@@ -1075,4 +1180,3 @@ load("./pcell.il")
 
 <img title="Pcell std_nmos" src="images/std_nmos.png" width="400" length="500"> 
 
-1234

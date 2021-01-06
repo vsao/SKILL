@@ -2,11 +2,7 @@
 ;   How to Run    : In CIW load the file Pin2Label.il
 
 
-<<<<<<< HEAD
-
-=======
 SITpin2label("TestSkill" "Inverter1" "layout")        ; Function call with the arguments
->>>>>>> 5b355cddac8bc9c53c4d9b82640ff1f32fc87f9a
 
 procedure( SITpin2label( libName cellName viewName)
 	prog( ()
