@@ -971,9 +971,7 @@ load("./pcell.il")
 
 <img title="Pcell nmos" src="images/nmos_pcell.png" width="500" length="500"> 
 
-<<<<<<< HEAD
-Vishal
-=======
+
 # Modifications in a NMOS pcell
 
 Here we are trying to create a standard xfab NMOS with array of diffusion contacts and align them one by one. Except lab6 constructor function all the SKILL files are same.
