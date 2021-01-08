@@ -1332,6 +1332,6 @@ lib=nil
 cell=nil
 cdf=nil
 ```
-<img title="Pcell layers" src="images/layers.png" width="200" length="200"> 
+<img title="Pcell layers" src="images/layers.png" width="300" length="300"> 
 
 
