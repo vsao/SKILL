@@ -29,8 +29,16 @@ procedure( CCScreatePcell7(cv w l)
       gateRod=rodCreateRect(
          ?cvId cv
          ?layer "POLY1"
-         ?bBox list(0:0 l:2.44)
+         ?bBox list(0:0 l:(w+0.44))
       ) ;rodCreateRect
+
+dist = 0
+i = 0
+while(dist < (w-0.2)
+	dist = dist + 0.22 + 0.31
+	i = i+1
+     )
+
 
 arrayOfDiffCon0  = rodCreateRect( ?cvId cv
 				  ?name "arrayOfDiffCon0" 
@@ -38,7 +46,7 @@ arrayOfDiffCon0  = rodCreateRect( ?cvId cv
 				  ?width 0.22
 				  ?length 0.22
             			  ?elementsX 1 
-                                  ?elementsY 4 
+                                  ?elementsY i 
 				  ?spaceY 0.225 )
 
 arrayOfDiffCon1  = rodCreateRect( ?cvId cv
@@ -47,19 +55,19 @@ arrayOfDiffCon1  = rodCreateRect( ?cvId cv
 				  ?width 0.22
 				  ?length 0.22
             			  ?elementsX 1 
-                                  ?elementsY 4 
+                                  ?elementsY i 
 				  ?spaceY 0.225 )
 
       nimpRod=rodCreateRect(
          ?cvId cv
          ?layer "NIMP"
-         ?bBox list(0:0 (1.48+l):2.7)
+         ?bBox list(0:0 (1.48+l):(w+0.70))
       ) ;rodCreateRect
 
       drainMetRod=rodCreateRect(
          ?cvId cv
          ?layer "MET1"
-         ?bBox list(0:0 0.34:w*0.96)
+         ?bBox list(0:0 0.34:(w-0.08))
          ?netName "D"
          ?pin t
       ) ;rodCreateRect
@@ -67,7 +75,7 @@ arrayOfDiffCon1  = rodCreateRect( ?cvId cv
       sourceMetRod=rodCreateRect(
          ?cvId cv
          ?layer "MET1"
-         ?bBox list(0:0 0.34:w*0.96)
+         ?bBox list(0:0 0.34:(w-0.08))
          ?netName "S"
          ?pin t
       ) ;rodCreateRect
@@ -114,77 +122,27 @@ arrayOfDiffCon1  = rodCreateRect( ?cvId cv
          ?refHandle "centerCenter"
       ) ;rodAlign
 
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon0.1" cv)
+for(j 1 i
+	contName0 = sprintf(nil "arrayOfDiffCon0.%d" j)
+	rodAlign(
+         ?alignObj rodGetObj(contName0 cv)
          ?alignHandle "lowerCenter"
          ?refObj drainMetRod
          ?refHandle "lowerCenter"
          ?xSep 0.0
-         ?ySep 0.06
-      ) ;rodAlign
-
+         ?ySep (0.06 + 0.53*(j-1))
+        ) ;rodAlign
+      
+      contName1 = sprintf(nil "arrayOfDiffCon1.%d" j)
       rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon0.2" cv)
-         ?alignHandle "lowerCenter"
-         ?refObj drainMetRod
-         ?refHandle "lowerCenter"
-         ?xSep 0.0
-         ?ySep (0.37+0.22)
-      ) ;rodAlign
-
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon0.3" cv)
-         ?alignHandle "lowerCenter"
-         ?refObj drainMetRod
-         ?refHandle "lowerCenter"
-         ?xSep 0.0
-         ?ySep (0.68+0.22+0.22)
-      ) ;rodAlign
-
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon0.4" cv)
-         ?alignHandle "lowerCenter"
-         ?refObj drainMetRod
-         ?refHandle "lowerCenter"
-         ?xSep 0.0
-         ?ySep (0.99+0.22+0.22+0.22)
-      ) ;rodAlign
-
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon1.1" cv)
+         ?alignObj rodGetObj(contName1 cv)
          ?alignHandle "lowerCenter"
          ?refObj sourceMetRod
          ?refHandle "lowerCenter"
          ?xSep 0.0
-         ?ySep 0.06
+         ?ySep (0.06 + 0.53*(j-1))
       ) ;rodAlign
-
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon1.2" cv)
-         ?alignHandle "lowerCenter"
-         ?refObj sourceMetRod
-         ?refHandle "lowerCenter"
-         ?xSep 0.0
-         ?ySep (0.37+0.22)
-      ) ;rodAlign
-
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon1.3" cv)
-         ?alignHandle "lowerCenter"
-         ?refObj sourceMetRod
-         ?refHandle "lowerCenter"
-         ?xSep 0.0
-         ?ySep (0.68+0.22+0.22)
-      ) ;rodAlign
-
-      rodAlign(
-         ?alignObj rodGetObj("arrayOfDiffCon1.4" cv)
-         ?alignHandle "lowerCenter"
-         ?refObj sourceMetRod
-         ?refHandle "lowerCenter"
-         ?xSep 0.0
-         ?ySep (0.99+0.22+0.22+0.22)
-      ) ;rodAlign
+   );for
 
    ) ;let
 ) ;procedure

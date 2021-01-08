@@ -1178,3 +1178,160 @@ load("./pcell.il")
 
 <img title="Pcell std_nmos" src="images/std_nmos.png" width="400" length="500"> 
 
+# Create layers
+
+##  lab8_constructor.il
+```
+procedure( CCScreatePcell8(cv w l sep botLay)
+   let( (metNum midLay topLay)
+
+      pcreMatchp("MET(\\d)" botLay)
+      metNum=atoi(pcreSubstitute("\\1"))
+      midLay=sprintf(nil "MET%d" metNum+1)
+      topLay=sprintf(nil "MET%d" metNum+2)
+
+      rodCreatePath(
+         ?cvId cv
+         ?layer midLay
+         ?width w
+         ?pts list(0:0 0:l)
+         ?offsetSubPath list(
+            list(?layer midLay ?width w ?sep sep+w)
+            list(?layer midLay ?width w ?sep 2*(sep+w))
+         ) ;list
+      ) ;rodCreatePath
+ 
+      rodCreateRect(
+         ?cvId cv
+         ?layer botLay
+         ?bBox list(-2*(w+sep)-w/2.0:0 w/2.0:l)
+      ) ;rodCreateRect
+
+      rodCreateRect(
+         ?cvId cv
+         ?layer topLay
+         ?bBox list(-2*(w+sep)-w/2.0:0 w/2.0:l)
+      ) ;rodCreateRect
+   ) ;let
+) ;procedure
+```
+##  lab8_callback.il
+```
+procedure( CCScheckParamValue8(param)
+   let( (paramError value)
+      paramError=nil
+      value=cdfFindParamByName(cdfgData symbolToString(param))->value
+      case( param
+         (w
+            cond(
+               (value<0.1
+                  paramError=t
+                  value=0.1
+               ) ;0.1
+                (value>10.0
+                  paramError=t
+                  value=10.0
+               ) ;10.0
+            ) ;cond
+         ) ;w
+         (l
+            cond(
+               (value<0.1
+                  paramError=t
+                  value=0.1
+               ) ;0.1
+                (value>50.0
+                  paramError=t
+                  value=50.0
+               ) ;50.0
+            ) ;cond
+         ) ;l
+      ) ;case
+            
+      cdfFindParamByName(cdfgData symbolToString(param))->value=value
+      when(paramError
+         case( param
+            (w error("Value of w must be within the range [0.1u,10.0u]"))
+            (l error("Value of l must be within the range [0.1u,50.0u]"))
+         ) ;case
+      ) ;when
+   ) ;let
+) ;procedure
+```
+
+##  lab8_cdf.il
+```
+let( ( lib cell view libId cellId cdfId )
+   lib="TestSkill"
+   cell="pcell8"
+   view="layout"
+
+   unless( ddGetObj(lib cell view)
+      dbOpenCellViewByType(lib cell view "maskLayout" "w")
+   ) ;unless
+
+   unless( cellId=ddGetObj(lib cell) error("Could not get cell %s." cell))
+   when( cdfId=cdfGetBaseCellCDF(cellId) cdfDeleteCDF(cdfId))
+   cdfId=cdfCreateBaseCellCDF(cellId)
+
+   cdfCreateParam( cdfId
+       ?name           "l"
+       ?prompt         "l"
+       ?defValue       10.0
+       ?type           "float"
+       ?callback       "CCScheckParamValue8('l)"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "w"
+       ?prompt         "w"
+       ?defValue       1.0
+       ?type           "float"
+       ?callback       "CCScheckParamValue8('w)"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "sep"
+       ?prompt         "Spacing"
+       ?defValue       1.0
+       ?type           "float"
+   ) ;cdfCreateParam
+
+   cdfCreateParam( cdfId
+       ?name           "botLay"
+       ?prompt         "Bottom Layer"
+       ?defValue       "MET1"
+       ?type           "cyclic"
+       ?choices        '("MET1" "MET2" "MET3")
+   ) ;cdfCreateParam
+
+    cdfSaveCDF( cdfId )
+) ;let
+```
+##  lab8.il
+```
+lib="TestSkill"
+cell="pcell8"
+cdf=cdfGetBaseCellCDF(ddGetObj(lib cell))
+
+pcDefinePCell(
+   list(ddGetObj(lib) cell "layout")
+   list(
+      (w "float" cdf->w->defValue)
+      (l "float" cdf->l->defValue) 
+      (sep "float" cdf->sep->defValue)
+      (botLay "string" cdf->botLay->defValue)
+   ) ;list
+   let( (cv)
+      cv=pcCellView
+      CCScreatePcell8(cv w l sep botLay)
+   ) ;let
+) ;pcDefinePCell
+
+lib=nil
+cell=nil
+cdf=nil
+```
+<img title="Pcell layers" src="images/layers.png" width="500" length="500"> 
+
+

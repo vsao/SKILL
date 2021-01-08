@@ -21,10 +21,10 @@ procedure( CCScheckParamValue8(param)
                   paramError=t
                   value=0.1
                ) ;0.1
-                (value>500.0
+                (value>50.0
                   paramError=t
-                  value=500.0
-               ) ;500.0
+                  value=50.0
+               ) ;50.0
             ) ;cond
          ) ;l
       ) ;case
@@ -33,7 +33,7 @@ procedure( CCScheckParamValue8(param)
       when(paramError
          case( param
             (w error("Value of w must be within the range [0.1u,10.0u]"))
-            (l error("Value of l must be within the range [0.1u,500.0u]"))
+            (l error("Value of l must be within the range [0.1u,50.0u]"))
          ) ;case
       ) ;when
    ) ;let

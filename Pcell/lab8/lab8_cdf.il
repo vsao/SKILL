@@ -14,7 +14,7 @@ let( ( lib cell view libId cellId cdfId )
    cdfCreateParam( cdfId
        ?name           "l"
        ?prompt         "l"
-       ?defValue       100.0
+       ?defValue       10.0
        ?type           "float"
        ?callback       "CCScheckParamValue8('l)"
    ) ;cdfCreateParam

@@ -9,10 +9,10 @@ procedure( CCScheckParamValue7(param)
                   paramError=t
                   value=0.2
                ) ;0.2
-                (value>2.0
+                (value>20.0
                   paramError=t
-                  value=2.0
-               ) ;2.0
+                  value=20.0
+               ) ;20.0
             ) ;cond
          ) ;w
          (l
@@ -32,7 +32,7 @@ procedure( CCScheckParamValue7(param)
       cdfFindParamByName(cdfgData symbolToString(param))->value=value
       when(paramError
          case( param
-            (w error("Value of w must be within the range [0.2u,2.0u]"))
+            (w error("Value of w must be within the range [0.2u,20.0u]"))
             (l error("Value of l must be within the range [0.18u,0.5u]"))
          ) ;case
       ) ;when
