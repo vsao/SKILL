@@ -1334,4 +1334,40 @@ cdf=nil
 ```
 <img title="Pcell layers" src="images/layers.png" width="300" length="300"> 
 
+##  Functions description
+
+- pcreMatchp
+```
+pcreMatchp( 
+g_pattern 
+S_subject 
+[ x_compOptBits ] 
+[ x_execOptBits ] 
+ )
+     => t / nil
+```
+
+Checks to see whether the subject string or symbol (S_subject) matches the specified regular expression pattern (g_pattern). You can use optional arguments to specify independent option bits for controlling pattern compiling and matching. The compiling and matching algorithms are PCRE/Perl-compatible. For greater efficiency when matching a number of subjects against a single pattern, you should use pcreCompile and pcreExecute.
+
+- atoi
+```
+atoi( 
+t_string [t]
+ )
+     => x_result / nil
+```
+
+Converts a string into an integer. Returns nil if the given string does not denote an integer.
+
+- pcreSubstitute
+```
+pcreSubstitute( 
+[o_pcreObject]
+t_string 
+ )
+     => t_result / nil
+```
+
+If o_pcreObject is not provided, pcreSubstitute copies the input string and substitutes all pattern tags in it using the corresponding matched strings from the last pcreExecute/pcreMatch* operation.
+
 
