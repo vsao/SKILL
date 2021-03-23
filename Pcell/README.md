@@ -1370,7 +1370,7 @@ t_string
 
 If o_pcreObject is not provided, pcreSubstitute copies the input string and substitutes all pattern tags in it using the corresponding matched strings from the last pcreExecute/pcreMatch* operation.
 
-# creating a poly resistor pcell
+# Creating a poly resistor pcell
 ## rupolym_constrctor.il
 ```
 procedure( CCScreatePcell1(cv w l)
