@@ -1567,4 +1567,4 @@ load("./constructor.il")
 load("./cdf.il")  
 load("./pcell.il")  
 
-<img title="Pcell res" src="images/rupolym.png" width="500" length="500"> 
+<img title="Pcell res" src="images/rupolym.png" width="650" length="650"> 
