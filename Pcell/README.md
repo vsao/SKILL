@@ -297,6 +297,35 @@ The file containing the constructor functions should be loaded first so that the
 
 As the codes that create the PCell are now separated from the pcDefinePCell function and hence, are not compiled directly into the PCell layout, they need to be always loaded once before the PCell can be used.
 
+# Take min DRC value from techfile
+## lab4_tech.il
+```
+lib="TestSkill"
+cell="pcell4"
+cv=dbOpenCellViewByType(lib cell "layout")
+tf=techGetTechFile(cv)
+cdf=cdfGetBaseCellCDF(ddGetObj(lib cell))
+
+pcDefinePCell( 
+   list( ddGetObj(lib) cell "layout")
+   list(
+      (w "float" cdf->w->defValue)
+      (l "float" cdf->l->defValue)
+      (layer "string" cdf->layer->defValue)
+      (spacingM1 "float" techGetSpacingRule(tf "minSpacing" "MET1"))
+   ) ;list
+   let( (cv)
+      cv=pcCellView
+      CCScreatePcell4(cv w l layer)
+   ) ;let
+) ;pcDefinePCell
+
+lib=nil
+cell=nil
+cdf=nil
+tf=nil
+```
+
 # CDF Callback Procedure
 ## lab5_constructor.il
 ```
